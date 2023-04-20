@@ -15,6 +15,7 @@ import java.io.Serializable;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User extends Common implements Serializable {
 
+    @Setter
     @Column(nullable = false, unique = true, length = 50)
     private String email;
 
@@ -26,4 +27,6 @@ public class User extends Common implements Serializable {
     @Column(nullable = false, length = 50)
     @Enumerated(EnumType.STRING)
     private UserRole role;
+
+
 }
