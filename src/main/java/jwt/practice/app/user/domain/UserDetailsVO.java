@@ -1,4 +1,4 @@
-package jwt.practice;
+package jwt.practice.app.user.domain;
 
 import lombok.Delegate;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package jwt.practice;
+package jwt.practice.enums.role;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

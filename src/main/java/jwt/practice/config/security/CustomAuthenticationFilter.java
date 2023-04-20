@@ -1,4 +1,4 @@
-package jwt.practice;
+package jwt.practice.config.security;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.AuthenticationManager;

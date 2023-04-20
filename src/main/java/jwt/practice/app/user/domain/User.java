@@ -1,5 +1,7 @@
-package jwt.practice;
+package jwt.practice.app.user.domain;
 
+import jwt.practice.app.common.domain.Common;
+import jwt.practice.enums.role.UserRole;
 import lombok.*;
 
 import javax.persistence.*;

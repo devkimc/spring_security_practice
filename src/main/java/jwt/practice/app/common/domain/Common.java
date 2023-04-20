@@ -1,4 +1,4 @@
-package jwt.practice;
+package jwt.practice.app.common.domain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
