@@ -4,13 +4,12 @@ import lombok.Delegate;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
 @RequiredArgsConstructor
 @Getter
-public class UserDetailsVO implements UserDetails {
+public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
 
     @Delegate
     private final User user;

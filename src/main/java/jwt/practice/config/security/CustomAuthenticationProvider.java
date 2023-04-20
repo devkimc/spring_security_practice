@@ -1,6 +1,6 @@
 package jwt.practice.config.security;
 
-import jwt.practice.app.user.domain.UserDetailsVO;
+import jwt.practice.app.user.domain.UserDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -25,13 +25,13 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String userEmail = token.getName();
         String userPw = (String) token.getCredentials();
         // UserDetailsService 를 통해 DB 에서 아이디로 사용자 조회
-        UserDetailsVO userDetailsVO = (UserDetailsVO) userDetailsService.loadUserByUsername(userEmail);
+        UserDetails userDetails = (UserDetails) userDetailsService.loadUserByUsername(userEmail);
 
-        if (!passwordEncoder.matches(userPw, userDetailsVO.getPassword())) {
-            throw new BadCredentialsException(userDetailsVO.getUsername() + "Invalid password");
+        if (!passwordEncoder.matches(userPw, userDetails.getPassword())) {
+            throw new BadCredentialsException(userDetails.getUsername() + "Invalid password");
         }
 
-        return new UsernamePasswordAuthenticationToken(userDetailsVO, userPw, userDetailsVO.getAuthorities());
+        return new UsernamePasswordAuthenticationToken(userDetails, userPw, userDetails.getAuthorities());
     }
 
     @Override
