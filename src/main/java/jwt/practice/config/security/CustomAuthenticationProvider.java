@@ -23,6 +23,14 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         final UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
         // AuthenticationFilter 에서 생성된 토큰으로부터 아이디와 비밀번호를 조회함
         final String email = token.getName();
+        final String userPw = (String) token.getCredentials();
+        // UserDetailsService 를 통해 DB 에서 아이디로 사용자 조회
+        final MyUserDetails userDetails = (MyUserDetails) userDetailsService.loadUserByUsername(email);
+        if (!passwordEncoder.matches(userPw, userDetails.getPassword())) {
+            throw new BadCredentialsException(userDetails.getUsername() + "Invalid password");
+        }
+
+        return new UsernamePasswordAuthenticationToken(userDetails, userPw, userDetails.getAuthorities());
     }
 
     @Override
