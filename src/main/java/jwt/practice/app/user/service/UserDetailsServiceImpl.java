@@ -1,6 +1,6 @@
 package jwt.practice.app.user.service;
 
-import jwt.practice.app.user.domain.UserDetails;
+import jwt.practice.app.user.domain.MyUserDetails;
 import jwt.practice.app.user.repository.UserRepository;
 import jwt.practice.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -17,9 +17,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String userEmail) {
+    public MyUserDetails loadUserByUsername(String userEmail) {
         return userRepository.findByEmail(userEmail)
-                .map(user -> new UserDetails(user, Collections.singleton(new SimpleGrantedAuthority(user.getRole().getValue()))))
+                .map(user -> new MyUserDetails(user, Collections.singleton(new SimpleGrantedAuthority(user.getRole().getValue()))))
                 .orElseThrow(() -> new UserNotFoundException(userEmail));
     }
 }

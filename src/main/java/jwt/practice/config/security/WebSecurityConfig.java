@@ -39,7 +39,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 // form 기반의 로그인에 대해 비활성화 한다.
                 .formLogin()
-                .disable();
+                .disable()
+                .addFilterBefore(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
     }
 
