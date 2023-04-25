@@ -1,12 +1,39 @@
 package jwt.practice.app.user.service;
 
 import jwt.practice.app.user.domain.User;
+import jwt.practice.app.user.dto.SignUpDTO;
+import jwt.practice.app.user.repository.UserRepository;
+import jwt.practice.enums.role.UserRole;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-public interface UserService {
+import java.util.List;
 
-    User login(User user);
+@RequiredArgsConstructor
+@Service
+@Transactional(readOnly = true)
+public class UserService {
 
-    User createUser(User user);
+    private final UserRepository userRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    User findUserByEmail(String email);
+    @Transactional
+    public User signUp(final SignUpDTO signUpDTO) {
+        final User user = User.builder()
+                .email(signUpDTO.getEmail())
+                .pw(passwordEncoder.encode(signUpDTO.getPw()))
+                .role(UserRole.ROLE_USER)
+                .build();
+        return userRepository.save(user);
+    }
+
+    public boolean isEmailDuplicated(final String email) {
+        return userRepository.existsByEmail(email);
+    }
+
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
 }
