@@ -1,6 +1,6 @@
 package jwt.practice.config.security;
 
-import jwt.practice.handler.CustomLoginSuccessHandler;
+import jwt.practice.handler.AuthenticationSuccessHandlerImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -66,8 +65,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public CustomLoginSuccessHandler customLoginSuccessHandler() {
-        return new CustomLoginSuccessHandler();
+    public AuthenticationSuccessHandlerImpl customLoginSuccessHandler() {
+        return new AuthenticationSuccessHandlerImpl();
     }
 
     @Bean

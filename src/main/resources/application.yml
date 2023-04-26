@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost/security?characterEncoding=utf-8
+    username: root
+    password: 1234
+
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    generate-ddl: false
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+
+jwt:
+  secret-key: "spring-security-jwt-example"
