@@ -1,5 +1,6 @@
 package jwt.practice.handler;
 
+import jwt.practice.config.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,12 +15,16 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHandler {
 
-//    private final JwtPro
+    private final JwtProvider jwtProvider;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException {
+        // 전달받은 인증정보 SecurityContextHolder 에 저장
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        response.sendRedirect("/about");
+        // JWT Token 발급
+        final String token = jwtProvider.generateToken(authentication);
+        // Response
+        ApiRe
     }
 }
