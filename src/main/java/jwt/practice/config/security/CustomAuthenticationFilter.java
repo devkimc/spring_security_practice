@@ -32,7 +32,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
             authRequest = new UsernamePasswordAuthenticationToken(loginDTO.getLoginId(), loginDTO.getPassword());
             System.out.println("authRequest = " + authRequest);
         } catch (IOException e) {
-            throw new NotValidException();
+            throw new RuntimeException("Token 발급 실패");
         }
         setDetails(request, authRequest);
 
