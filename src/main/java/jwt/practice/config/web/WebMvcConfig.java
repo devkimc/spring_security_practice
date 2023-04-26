@@ -19,14 +19,15 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
 
-        // /에 해당하는 Url mapping 을 /common/test로 forward 한다.
-        registry.addViewController("/").setViewName("forward:/index");
+        // 경로에 해당하는 url 을 forward
+//        registry.addViewController("/loginPage").setViewName("login");
         // 우선 순위를 가장 높게 잡는다.
-        registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
+//        registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        // 정적 자원의 경로를 허용
         registry.addResourceHandler("/**").addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS);
     }
 }

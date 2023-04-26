@@ -19,6 +19,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+//    private final JwtPro
+
     private final UserDetailsService userDetailsService;
 
     // 정적 자원에 대해서는 Security 설정을 적용하지 않음
