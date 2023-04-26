@@ -1,17 +1,15 @@
 package jwt.practice.app.user.repository;
 
 import jwt.practice.app.user.domain.User;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository {
 
-    User findByEmailAndPw(String email, String pw);
 
-    Optional<User> findByEmail(String email);
-
-    boolean existsByEmail(String email);
+    Optional<User> findFirstUserByLoginOrderByIdAsc(String username);
+    Optional<User> findById(long id);
+    User save(User saveUser);
 }

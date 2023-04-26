@@ -38,8 +38,5 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
         // AuthenticationManager 에게 전달 -> AuthenticationProvider 의 인증 메서드 실행
         return this.getAuthenticationManager().authenticate(authRequest);
-
-        setDetails(request, authRequest);
-        return this.getAuthenticationManager().authenticate(authRequest);
     }
 }

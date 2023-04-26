@@ -1,6 +1,5 @@
 package jwt.practice.app.user.controller;
 
-import jwt.practice.app.user.domain.User;
 import jwt.practice.app.user.service.UserService;
 import jwt.practice.enums.role.UserRole;
 import lombok.NonNull;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @RequiredArgsConstructor
 @Controller

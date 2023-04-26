@@ -1,52 +1,56 @@
 package jwt.practice.app.user.domain;
 
-import lombok.Delegate;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Getter
-public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
+@ToString
+public class UserDetailsImpl implements UserDetails {
 
-    @Delegate
-    private final User user;
+    private final String username;
+    private final String password;
+    private final String email;
+    private final String name;
     private final Collection<? extends GrantedAuthority> authorities;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+        return this.authorities;
     }
 
     @Override
     public String getPassword() {
-        return user.getPw();
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return user.getEmail();
+        return username;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return user.getIsEnable();
+        return false;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return user.getIsEnable();
+        return false;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return user.getIsEnable();
+        return false;
     }
 
     @Override
     public boolean isEnabled() {
-        return user.getIsEnable();
+        return false;
     }
 }

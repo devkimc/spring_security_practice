@@ -1,6 +1,5 @@
 package jwt.practice.app.user.service;
 
-import jwt.practice.app.user.domain.User;
 import jwt.practice.app.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
