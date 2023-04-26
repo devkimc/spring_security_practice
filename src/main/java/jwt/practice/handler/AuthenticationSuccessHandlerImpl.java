@@ -1,5 +1,6 @@
 package jwt.practice.handler;
 
+import jwt.practice.app.common.ApiResponse;
 import jwt.practice.config.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -25,6 +26,6 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
         // JWT Token 발급
         final String token = jwtProvider.generateToken(authentication);
         // Response
-        ApiRe
+        ApiResponse.token(response, token);
     }
 }
