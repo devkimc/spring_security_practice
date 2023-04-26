@@ -1,7 +1,6 @@
 package jwt.practice.security;
 
 import jwt.practice.user.domain.User;
-import jwt.practice.security.UserDetailsImpl;
 import jwt.practice.user.domain.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,11 +14,11 @@ import java.util.Collections;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private final UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) {
-        User user = userRepository.findFirstUserByLoginOrderByIdAsc(username).orElseThrow();
+        User user = userRepository.findFirstUserByLoginIdOrderByIdAsc(username).orElseThrow(() -> new RuntimeException("Not Found User"));
         return new UserDetailsImpl(
                 user.getLoginId(),
                 user.getPassword(),
