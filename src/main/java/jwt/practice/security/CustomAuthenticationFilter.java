@@ -24,8 +24,11 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         final UsernamePasswordAuthenticationToken authRequest;
 
+        System.out.println("----------me-----------");
+
         final LoginDTO loginDTO;
         try {
+            System.out.println("----------meme-----------");
             // 사용자 요청 정보로 UserPasswordAuthentication 발급
             loginDTO = new ObjectMapper().readValue(request.getInputStream(), LoginDTO.class);
             System.out.println("loginDTO = " + loginDTO);

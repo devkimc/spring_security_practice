@@ -42,7 +42,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+        web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations())
+                .mvcMatchers("/docs/**");
     }
 
     /**
@@ -53,13 +54,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         final String[] GET_WHITELIST = new String[]{
                 "/login",
-                "/user/login-id/**",
-                "/user/email/**",
-                "/affiliate"
         };
 
         final String[] POST_WHITELIST = new String[]{
-                "/client-user"
+                "/user"
         };
 
         http.csrf().disable()
@@ -68,13 +66,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(authenticationEntryPoint) // 인증 실패
                 .accessDeniedHandler(accessDeniedHandler) // 인가 실패
                 .and().authorizeRequests()
-                .antMatchers(HttpMethod.GET, GET_WHITELIST).permitAll() // 해당 GET URL 은 모두 허용
-                .antMatchers(HttpMethod.POST, POST_WHITELIST).permitAll() // 해당 POST URL 은 모두 허용
-//                .antMatchers("/client-user/**").hasAnyRole(UserType.)
+                .antMatchers(HttpMethod.GET, GET_WHITELIST).permitAll() // 해당 GET URL은 모두 허용
+                .antMatchers(HttpMethod.POST, POST_WHITELIST).permitAll() // 해당 POST URL은 모두 허용
                 .antMatchers("**").hasAnyRole("USER") // 권한 적용
                 .anyRequest().authenticated() // 나머지 요청에 대해서는 인증을 요구
                 .and() // 로그인하는 경우에 대해 설정함
                 .formLogin().disable() // 로그인 페이지 사용 안함
+//                .loginPage("/user/loginView") // 로그인 성공 URL을 설정함
+//                .successForwardUrl("/index") // 로그인 실패 URL을 설정함
+//                .failureForwardUrl("/index").permitAll()
                 .addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class);
     }
@@ -83,7 +83,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * 비밀번호 암호화 및 확인 클래스
      */
     @Bean
-    PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 

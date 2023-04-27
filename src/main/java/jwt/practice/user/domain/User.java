@@ -3,12 +3,12 @@ package jwt.practice.user.domain;
 import lombok.*;
 import javax.persistence.*;
 
-@Entity
-@Table(name = "users")
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "users")
 public class User {
 
     @Id
