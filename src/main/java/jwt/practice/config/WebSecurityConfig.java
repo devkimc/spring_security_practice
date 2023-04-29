@@ -53,11 +53,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         final String[] GET_WHITELIST = new String[]{
-                "/login",
         };
 
         final String[] POST_WHITELIST = new String[]{
-                "/user"
+                "/login",
+//                "/user"
         };
 
         http.csrf().disable()
@@ -94,7 +94,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public CustomAuthenticationFilter authenticationFilter() throws Exception {
         CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManager());
         // 필터 URL 설정
-//        customAuthenticationFilter.setFilterProcessesUrl("/login");
+        customAuthenticationFilter.setFilterProcessesUrl("/login");
         // 인증 성공 핸들러
         customAuthenticationFilter.setAuthenticationSuccessHandler(authenticationSuccessHandler);
         // 인증 실패 핸들러

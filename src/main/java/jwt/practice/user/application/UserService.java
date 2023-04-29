@@ -1,5 +1,6 @@
 package jwt.practice.user.application;
 
+import jwt.practice.security.dto.LoginDTO;
 import jwt.practice.user.application.dto.UserInfoDTO;
 import jwt.practice.user.application.dto.UserJoinDTO;
 import jwt.practice.user.domain.User;
@@ -29,6 +30,14 @@ public class UserService {
                 .build();
 
         userRepository.save(saveUser);
+    }
+
+    @Transactional
+    public void login(LoginDTO loginDTO) {
+        User member = userRepository.findByLoginId(loginDTO.getLoginId()).orElseThrow(() -> new IllegalArgumentException("가입되지 않은 아이디입니다."));
+        if(!passwordEncoder.matches(loginDTO.getPassword(), member.getPassword())) {
+            throw new IllegalArgumentException("잘못된 비밀번호입니다.");
+        }
     }
 
     @Transactional(readOnly = true)

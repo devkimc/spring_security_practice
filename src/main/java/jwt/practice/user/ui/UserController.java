@@ -2,9 +2,12 @@ package jwt.practice.user.ui;
 
 import jwt.practice.common.ApiResponse;
 import jwt.practice.common.DataApiResponse;
+import jwt.practice.security.dto.LoginDTO;
 import jwt.practice.user.application.UserService;
 import jwt.practice.user.application.dto.UserInfoDTO;
 import jwt.practice.user.application.dto.UserJoinDTO;
+import jwt.practice.user.domain.User;
+import jwt.practice.user.domain.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,12 +18,12 @@ public class UserController {
 
     private final UserService userService;
 
-//    @PostMapping(name = "로그인", value = "/login")
-//    public ApiResponse join(@RequestBody UserJoinDTO userJoinDTO) {
-//        System.out.println("userJoinDTO = " + userJoinDTO);
-//        userService.join(userJoinDTO);
-//        return new ApiResponse();
-//    }
+    @PostMapping(name = "로그인", value = "/login")
+    public ApiResponse login(@RequestBody LoginDTO loginDTO) {
+        System.out.println("loginDTO = " + loginDTO);
+        userService.login(loginDTO);
+        return new ApiResponse();
+    }
 
     @PostMapping(name = "회원가입", value = "/user")
     public ApiResponse join(@RequestBody UserJoinDTO userJoinDTO) {

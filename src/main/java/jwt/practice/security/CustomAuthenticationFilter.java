@@ -24,20 +24,19 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         final UsernamePasswordAuthenticationToken authRequest;
 
-
         final LoginDTO loginDTO;
         try {
             // 사용자 요청 정보로 UserPasswordAuthentication 발급
             loginDTO = new ObjectMapper().readValue(request.getInputStream(), LoginDTO.class);
-            System.out.println("loginDTO = " + loginDTO);
             authRequest = new UsernamePasswordAuthenticationToken(loginDTO.getLoginId(), loginDTO.getPassword());
-            System.out.println("authRequest = " + authRequest);
+            System.out.println("UsernamePasswordAuthenticationToken 토큰 생성" + authRequest);
         } catch (IOException e) {
             throw new RuntimeException("Token 발급 실패");
         }
         setDetails(request, authRequest);
 
         // AuthenticationManager 에게 전달 -> AuthenticationProvider 의 인증 메서드 실행
+        System.out.println("AuthenticationManager 에게 전달 -> AuthenticationProvider");
         return this.getAuthenticationManager().authenticate(authRequest);
     }
 }

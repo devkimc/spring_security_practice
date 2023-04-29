@@ -16,6 +16,9 @@ public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint {
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authenticationException) throws IOException, ServletException {
+        System.out.println("request = " + request);
+        System.out.println("authenticationException = " + authenticationException);
+
         ApiResponse.error(response, ApiResponseType.UNAUTHORIZED_RESPONSE);
     }
 }
